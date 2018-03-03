@@ -126,7 +126,7 @@ For instance,
   :plugins [[me.arrdem/lein-git-version "2.0.3"]]
   ...
   :git-version {:version-file "resources/com/my_app/version.edn"
-                :version-file-keys [:ref :version :timestamp]}))
+                :file-keys [:ref :version :timestamp]}))
 ```
 
 will cause lein-git-version to make the specified directory, and lay
