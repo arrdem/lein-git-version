@@ -100,8 +100,10 @@ itself to compute its own version.
              tag
              (let [[_ prefix patch] (re-find #"(\d+\.\d+)\.(\d+)" tag)
                    patch            (Long/parseLong patch)
-                   patch+           (inc patch)]
-               (format "%s.%d-%s-SNAPSHOT" prefix patch+ branch))))
+                   patch+           (inc patch)
+                   branch+          (-> branch
+                                       (.replaceAll "[^A-Za-z0-9]" "_"))]
+               (format "%s.%d-%s-SNAPSHOT" prefix patch+ branch+))))
   }
   ...)
 ```
