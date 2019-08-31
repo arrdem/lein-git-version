@@ -41,7 +41,7 @@ Add:
 
 ```clojure
 ;; Add in the git-version plugin
-:plugins [[me.arrdem/lein-git-version "2.0.3"]
+:plugins [[me.arrdem/lein-git-version "2.0.8"]
           ...]
 ```
 
@@ -69,14 +69,14 @@ For instance,
 
 ```clojure
 (defproject bar :project/git-ref
-  :plugins [[me.arrdem/lein-git-version "2.0.3"]]
+  :plugins [[me.arrdem/lein-git-version "2.0.8"]]
   ...)
 ```
 or
 
 ```clojure
 (defproject baz :project/git-ref-short
-  :plugins [[me.arrdem/lein-git-version "2.0.3"]]
+  :plugins [[me.arrdem/lein-git-version "2.0.8"]]
   ...)
 ```
 lein-git-version can also be used to compute a versions string, as an
@@ -89,7 +89,7 @@ itself to compute its own version.
 
 ```clojure
 (defproject me.arrdem/lein-git-version "_"
-  :plugins [[me.arrdem/lein-git-version "2.0.3"]]
+  :plugins [[me.arrdem/lein-git-version "2.0.8"]]
 
   :git-version
     {:status-to-version
@@ -103,6 +103,16 @@ itself to compute its own version.
                    patch+           (inc patch)]
                (format "%s.%d-%s-SNAPSHOT" prefix patch+ branch))))
   }
+  ...)
+```
+
+If you want reuse this function used by lein-git-version itself, simply set `:status-to-version` to `lein-git-version.plugin/default-status-to-version`.
+
+```clojure
+(defproject me.arrdem/lein-git-version "_"
+  :plugins [[me.arrdem/lein-git-version "2.0.8"]]
+
+  :git-version {:status-to-version lein-git-version.plugin/default-status-to-version}
   ...)
 ```
 
@@ -123,7 +133,7 @@ For instance,
 
 ```clojure
 (defproject com.my-app/cares-what-version-it-is :project/ref-short
-  :plugins [[me.arrdem/lein-git-version "2.0.3"]]
+  :plugins [[me.arrdem/lein-git-version "2.0.8"]]
   ...
   :git-version {:version-file "resources/com/my_app/version.edn"
                 :version-file-keys [:ref :version :timestamp]}))
