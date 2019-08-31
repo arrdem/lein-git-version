@@ -8,9 +8,21 @@
   "The default configuration values."
   {:git               "git"
    :describe-pattern  git/git-describe-pattern
-   :tag-to-version    nil
+   :status-to-version    nil
    :version-file      nil
    :version-file-keys [:ref :ref-short :tag :ahead :ahead? :dirty? :message :timestamp :version]})
+
+(defn default-status-to-version
+  "A function you may want use for :status-to-version"
+  [{:keys [tag version branch ahead ahead? dirty?] :as git}]
+          (assert (re-find #"\d+\.\d+\.\d+" tag)
+                  "Tag is assumed to be a raw SemVer version")
+          (if (and tag (not ahead?) (not dirty?))
+             tag
+             (let [[_ prefix patch] (re-find #"(\d+\.\d+)\.(\d+)" tag)
+                   patch            (Long/parseLong patch)
+                   patch+           (inc patch)]
+               (format "%s.%d-%s-SNAPSHOT" prefix patch+ branch))))
 
 (defn write-version-file
   "Write a project \"version\" file."
