@@ -146,6 +146,8 @@ which is itself an un-maintained alternative to
 [michalmarczyk's](https://github.com/michalmarczyk/lein-git-version)
 original project.
 
+A further iteration of derivative work was carried out here in [Day8's lein-git-inject](https://github.com/day8/lein-git-inject/blob/master/README.md).
+
 ## License
 
 Copyright © 2017 Reid "arrdem" McKenzie
